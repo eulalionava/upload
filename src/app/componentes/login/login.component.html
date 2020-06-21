@@ -1,0 +1,24 @@
+<div class="row justify-content-center d-flex mt-5">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Iniciar sesion</h4>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <input type="text" name="user" #user="ngModel" [(ngModel)]="usuario.email"
+                        placeholder="Escrie tu usuario" class="form-control form-control-lg" maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="pass" #pass="ngModel" [(ngModel)]="usuario.password"
+                        placeholder="Escrie tu contraseña" class="form-control form-control-lg" maxlength="15" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="button" value="Iniciar" class="btn btn-primary form-control" (click)="iniciarSesion()">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,97 @@
+<main>
+    <section class="jumbotron bg-white text-center mb-0">
+        <div class="container">
+            <h1 class="display-4">Mi Abum de Fotos</h1>
+            <p>
+                <input type="text" class="form-control" placeholder="Buscar una foto">
+                <input type="button" class="btn btn-success mt-2" value="Buscar">
+            </p>
+        </div>
+    </section>
+    <div class="py-3 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-3" *ngFor="let imagen of imagenes">
+                    <div class="card mb-2">
+                        <img src="http://localhost:4000/getImagen/{{imagen.ruta}}" height="200" class="card-img-top">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="form-group">
+                                    <a href="#verimg{{imagen.id}}" type="button" data-toggle="modal" class="btn btn-sm btn-outline-secondary">ver</a>
+                                    <a href="#editImg{{imagen.id}}" type="button" data-toggle="modal" class="btn btn-sm btn-outline-secondary">editar</a>
+                                </div>
+                                <small class="lead muted">9 min</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- The Modal show image-->
+                    <div class="modal" id="verimg{{imagen.id}}">
+                        <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h5 class="modal-title">Imagen</h5>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <img src="http://localhost:4000/getImagen/{{imagen.ruta}}" height="400" class="card-img-top">
+                            </div>
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- Fin modal -->
+
+                    <!-- The Modal edit image-->
+                    <div class="modal" id="editImg{{imagen.id}}">
+                        <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h5 class="modal-title">Editando</h5>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="http://localhost:4000/getImagen/{{imagen.ruta}}" height="300" class="card-img-top">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Renombrar imagen</label>
+                                            <input type="text" class="form-control" placeholder="{{imagen.nombre}}" name="txtNombre" 
+                                            #txtNombre="ngModel" [(ngModel)]="datos.nombre" maxlength="25" required >
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Detalles de iamgen</label>
+                                            <textarea name="history" id="" cols="30" rows="10" placeholder="{{imagen.historia}}" 
+                                            #history="ngModel" [(ngModel)]="datos.historia" maxlength="100" required>
+                                            {{imagen.historia}}
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button class="btn btn-primary form-control" data-dismiss="modal" (click)="actualizarCambios(imagen.id)">Guardar cambios</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- Fin modal -->
+ 
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
