@@ -11,6 +11,7 @@ import Swal  from 'sweetalert2';
 })
 export class HomeComponent implements OnInit {
   public imagenes=[];
+  public datosUser:any;
 
   public datos = {
     id:'',
@@ -23,6 +24,8 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.datosUser =JSON.parse( localStorage.getItem("datos_usuario"));
+    console.log(this.datosUser);
     this.getAllImages();
   }
 
@@ -42,7 +45,7 @@ export class HomeComponent implements OnInit {
   actualizarCambios(id){
     if( this.datos.nombre != "" && this.datos.historia != ""){
       this.datos.id = id;
-      this._homeService.updateImg(this.datos).subscribe(
+      this._homeService.updateImg(this.datos,this.datosUser).subscribe(
         response=>{
           if(response['ok']){
             this.getAllImages();

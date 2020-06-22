@@ -24,13 +24,14 @@ export class HomeService {
 
   }
 
-  updateImg(datos:any){
-    let params = JSON.stringify({datos:datos});
+  updateImg(datos:any,token:any){
+    let params = JSON.stringify({datos:datos,token:token});
 
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type','application/json');
+    headers = headers.set('token',token.token);
     
-    return this._http.put(this.url + 'updateImage',params,{headers:headers});
+    return this._http.post(this.url + 'updateImage',params,{headers:headers});
 
   }
 

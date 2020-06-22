@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute,Params } from '@angular/router';
 import { Usuario } from '../../modelos/usuario';
 import { UsuarioService} from '../../services/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -22,12 +23,11 @@ export class LoginComponent implements OnInit {
   iniciarSesion(){
     this._usuarioService.getInciarSesion(this.usuario).subscribe(
       response=>{
-        console.log(response);
         if( response['ok']){
-          localStorage.setItem('datos_usuario',JSON.stringify(response['usuario']));
+          localStorage.setItem('datos_usuario',JSON.stringify(response));
           this._router.navigate(['/home']);
         }else{
-          alert(response['err']['message']);
+          Swal.fire("",response['err']['message'],"error");
         }
       },
       error=>{
